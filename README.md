@@ -14,11 +14,23 @@ MVVM Pattern: This architectural pattern is used to separate the user interface 
 Cookies: Used to store cart information on the client-side for a persistent shopping experience.
 Installation
 Clone the repository:
+bash
+Copier le code
 git clone <repository_url>
 Navigate to the project directory:
+bash
+Copier le code
 cd ShoppingCartWebApp
-Restore dependencies:dotnet restore
-Run the application:dotnet run
+Restore dependencies:
+bash
+Copier le code
+dotnet restore
+Run the application:
+bash
+Copier le code
+dotnet run
 Usage
 To view the list of products, navigate to: https://localhost:7216/Products
 To view the contents of your shopping cart, navigate to: https://localhost:7216/ShoppingCarts
+Contributing
+Contributions are welcome! Please feel free to submit a pull request or open an issue for any suggestions or improvements.
