@@ -1,4 +1,4 @@
-Shopping Cart Web Application
+**Shopping Cart Web Application
 Overview
 This project is a web application developed using .NET, designed to provide a seamless shopping experience. The application follows the Model-View-ViewModel (MVVM) architectural pattern, ensuring a clean separation of concerns and maintainable code.
 
