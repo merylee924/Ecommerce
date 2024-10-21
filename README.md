@@ -20,5 +20,9 @@ To view the list of products, navigate to: https://localhost:7216/Products
 To view the contents of your shopping cart, navigate to: https://localhost:7216/ShoppingCart
 
 
+## ScreenShots
+<img width="713" alt="ProductList" src="https://github.com/user-attachments/assets/199a944c-4151-4851-965d-5bf158492548">
+
+<img width="777" alt="ShoppingCart" src="https://github.com/user-attachments/assets/c96b00bb-1967-4ee3-953a-d54119a14237">
 
 
