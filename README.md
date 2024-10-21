@@ -15,7 +15,14 @@ This project is a **web application** developed using **.NET**, designed to prov
 - **MVVM Pattern**: This architectural pattern is used to separate the user interface from the underlying business logic.
 - **Cookies**: Used to store cart information on the client-side for a persistent shopping experience.
 
+## Usage
+To view the list of products, navigate to: https://localhost:7216/Products
+To view the contents of your shopping cart, navigate to: https://localhost:7216/ShoppingCart
+
 ## Installation
-1. Clone the repository:
-   ```bash
-   git clone <repository_url>
+Restore dependencies:
+ ```bash
+dotnet restore
+Run the application:
+ ```bash
+dotnet run
