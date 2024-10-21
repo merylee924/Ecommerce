@@ -23,6 +23,7 @@ To view the contents of your shopping cart, navigate to: https://localhost:7216/
 Restore dependencies:
  ```bash
 dotnet restore
+
 Run the application:
  ```bash
 dotnet run
