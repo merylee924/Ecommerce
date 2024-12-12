@@ -1,49 +1,49 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
-using Ecommerce.Data; // Ensure you have the correct namespace for your DbContext
+﻿using Ecommerce.Data;
+using Ecommerce.Services;
+using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 
-namespace Ecommerce
+var builder = WebApplication.CreateBuilder(args);
+
+// Configure EF Core with SQL Server
+builder.Services.AddDbContext<EcommerceContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Configure Redis as a singleton connection
+builder.Services.AddSingleton<ConnectionMultiplexer>(sp =>
 {
-    public class Program
+    var configuration = builder.Configuration.GetConnectionString("RedisConnection");
+    return ConnectionMultiplexer.Connect(configuration);
+});
+
+// Configure the custom RedisService for application logic
+builder.Services.AddSingleton<RedisService>();
+
+// Configure CORS for allowing communication with frontend
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFlutter", builder =>
     {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 
-            // Configure the database context
-            builder.Services.AddDbContext<EcommerceContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("EcommerceContext")
-                ?? throw new InvalidOperationException("Connection string 'EcommerceContext' not found.")));
+builder.Services.AddControllers();
 
-            // Add Razor Pages and configure JSON options to handle circular references
-            builder.Services.AddRazorPages()
-                .AddJsonOptions(options =>
-                {
-                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
-                    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-                });
+var app = builder.Build();
 
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Error");
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            // Remove authentication and authorization
-            // app.UseAuthentication(); // Removed
-            // app.UseAuthorization();  // Removed
-
-            app.MapRazorPages();
-
-            app.Run();
-        }
-    }
+// **Middleware Configuration**
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
 }
+
+app.UseCors("AllowFlutter");
+app.UseHttpsRedirection();
+app.UseRouting();
+app.UseAuthorization();
+app.MapControllers();
+
+app.Run();

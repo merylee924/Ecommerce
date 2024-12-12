@@ -1,1 +1,70 @@
-[]
+[
+  {
+    "ContainingType": "Ecommerce.Controllers.RedisProductController",
+    "Method": "GetProduct",
+    "RelativePath": "api/RedisProduct/get/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ecommerce.Controllers.RedisProductController",
+    "Method": "PopulateRedis",
+    "RelativePath": "api/RedisProduct/populate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ecommerce.Controllers.StoreProductController",
+    "Method": "GetProductsByStore",
+    "RelativePath": "api/StoreProduct/{storeId}/products",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "storeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ecommerce.Controllers.StoreProductController",
+    "Method": "AddProductToStore",
+    "RelativePath": "api/StoreProduct/add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Ecommerce.Properties.dto.StoreProductRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ecommerce.Controllers.StoreProductController",
+    "Method": "GetAllStores",
+    "RelativePath": "api/StoreProduct/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

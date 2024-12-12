@@ -5,9 +5,11 @@ using Ecommerce.Data;
 using Ecommerce.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ecommerce.Pages.ShoppingCarts
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly EcommerceContext _context;
@@ -24,6 +26,8 @@ namespace Ecommerce.Pages.ShoppingCarts
 
         public void OnGet()
         {
+
+            
             // Charger les articles du panier depuis les cookies ou la base de données
             CartItems = Request.Cookies.GetObject<List<CartItem>>("Cart") ?? new List<CartItem>();
 
@@ -67,6 +71,7 @@ namespace Ecommerce.Pages.ShoppingCarts
 
             return RedirectToPage();
         }
+
 
     }
 }
