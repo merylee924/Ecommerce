@@ -1,13 +1,9 @@
-﻿using Ecommerce.Data;
-using Ecommerce.Services;
-using Microsoft.EntityFrameworkCore;
+﻿using Ecommerce.Services;
 using StackExchange.Redis;
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Configure EF Core with SQL Server
-builder.Services.AddDbContext<EcommerceContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Configure Redis as a singleton connection
 builder.Services.AddSingleton<ConnectionMultiplexer>(sp =>
@@ -19,20 +15,25 @@ builder.Services.AddSingleton<ConnectionMultiplexer>(sp =>
 // Configure the custom RedisService for application logic
 builder.Services.AddSingleton<RedisService>();
 
+// Add Ocelot as the API Gateway
+builder.Services.AddOcelot();
+
 // Configure CORS for allowing communication with frontend
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFlutter", builder =>
-    {
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader();
-    });
+    options.AddPolicy("AllowAll",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
 });
 
 builder.Services.AddControllers();
 
 var app = builder.Build();
+app.UseCors("AllowAll");
 
 // **Middleware Configuration**
 if (app.Environment.IsDevelopment())
@@ -44,6 +45,10 @@ app.UseCors("AllowFlutter");
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
+
+// Use Ocelot middleware to handle the API Gateway logic
+//await app.UseOcelot();
+
 app.MapControllers();
 
 app.Run();

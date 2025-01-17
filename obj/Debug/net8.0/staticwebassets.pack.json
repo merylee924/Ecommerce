@@ -1,10 +1,6 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\info\\Downloads\\Ecommerce\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Ecommerce.bundle.scp.css",
-      "PackagePath": "staticwebassets\\Ecommerce.bundle.scp.css"
-    },
-    {
       "Id": "C:\\Users\\info\\Downloads\\Ecommerce\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using StackExchange.Redis;
+using Ecommerce.dto;
 
 namespace Ecommerce.Controllers
 {
@@ -21,8 +22,9 @@ namespace Ecommerce.Controllers
             _redisService = redisService;
         }
 
+        // Endpoint to create a store (already exists)
         [HttpPost("add")]
-        public IActionResult AddProductToStore([FromBody] StoreProductRequest request)
+        public IActionResult CreateStore([FromBody] StoreRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -31,17 +33,44 @@ namespace Ecommerce.Controllers
 
             try
             {
-                var serializedProduct = JsonConvert.SerializeObject(request.Product);
-                _redisService.Database.ListRightPush($"store:{request.StoreId}:products", serializedProduct);
+                // Serialize the store data and save it in Redis using a key pattern "store:{storeId}"
+                var serializedStore = JsonConvert.SerializeObject(request);
+                _redisService.Database.StringSet($"store:{request.Id}", serializedStore);
 
-                return Ok(new { message = "Produit ajouté avec succès dans Redis pour le magasin correspondant." });
+                return Ok(new { message = "Magasin créé avec succès dans Redis." });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "Erreur dans l'ajout du produit dans Redis.", error = ex.Message });
+                return StatusCode(500, new { message = "Erreur lors de la création du magasin dans Redis.", error = ex.Message });
             }
         }
 
+        // Endpoint to add a product to a store
+        [HttpPost("{storeId}/addProduct")]
+        public IActionResult AddProductToStore(int storeId, [FromBody] Product product)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var db = _redisService.Database;
+                var serializedProduct = JsonConvert.SerializeObject(product);
+
+                // Store product in Redis list under the key "store:{storeId}:products"
+                db.ListRightPush($"store:{storeId}:products", serializedProduct);
+
+                return Ok(new { message = "Produit ajouté avec succès au magasin." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Erreur lors de l'ajout du produit au magasin.", error = ex.Message });
+            }
+        }
+
+        // Endpoint to get products by store
         [HttpGet("{storeId}/products")]
         public IActionResult GetProductsByStore(int storeId)
         {
@@ -62,38 +91,28 @@ namespace Ecommerce.Controllers
             }
         }
 
-        // New method to retrieve all stores
+        // Endpoint to get all stores
         [HttpGet("all")]
         public IActionResult GetAllStores()
         {
             try
             {
                 var db = _redisService.Database;
-
-                // Get the Redis server instance
                 var server = _redisService.GetServer();
 
-                // Get all keys that match the "store:*" pattern
                 var storeKeys = server.Keys(pattern: "store:*").ToList();
 
                 var stores = new List<Store>();
 
                 foreach (var key in storeKeys)
                 {
-                    // Check the data type of the key
                     var type = db.KeyType(key);
 
-                    // Only handle the keys that store string data
                     if (type == RedisType.String)
                     {
-                        var storeData = db.StringGet(key); // Retrieve store data as JSON from Redis
-                        var store = JsonConvert.DeserializeObject<Store>(storeData); // Deserialize into Store object
+                        var storeData = db.StringGet(key);
+                        var store = JsonConvert.DeserializeObject<Store>(storeData);
                         stores.Add(store);
-                    }
-                    else
-                    {
-                        // Log or handle the case where the key contains a different type of data
-                        Console.WriteLine($"Key {key} is not a string, skipping...");
                     }
                 }
 
@@ -105,7 +124,28 @@ namespace Ecommerce.Controllers
             }
         }
 
+        // Endpoint to get a store by id
+        [HttpGet("{storeId}")]
+        public IActionResult GetStoreById(int storeId)
+        {
+            try
+            {
+                var db = _redisService.Database;
+                var storeData = db.StringGet($"store:{storeId}");
 
+                if (storeData.IsNullOrEmpty)
+                {
+                    return NotFound(new { message = "Magasin non trouvé." });
+                }
 
+                var store = JsonConvert.DeserializeObject<Store>(storeData);
+
+                return Ok(store);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Erreur lors de la récupération du magasin.", error = ex.Message });
+            }
+        }
     }
 }

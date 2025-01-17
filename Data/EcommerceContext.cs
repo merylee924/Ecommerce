@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Ecommerce.Models;
-using Tp_Panier.Models;
 
 namespace Ecommerce.Data
 {
@@ -13,12 +12,11 @@ namespace Ecommerce.Data
 
         public DbSet<Product> Product { get; set; } = default!;
         public DbSet<Category> Category { get; set; } = default!;
-        public DbSet<Order> Order { get; set; } = default!;
+      
         public DbSet<CartItem> CartItem { get; set; } = default!;
-        public DbSet<OrderItem> OrderItem { get; set; } = default!;
         public DbSet<Payment> Payment { get; set; } = default!;
         public DbSet<ShoppingCart> ShoppingCart { get; set; } = default!;
-        public DbSet<User> Users { get; set; } = default!;
+       
 
         // Nouvelles entités
         public DbSet<Store> Stores { get; set; } = default!;

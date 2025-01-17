@@ -9,7 +9,6 @@
         public decimal Amount { get; set; }
 
         // Relationships
-        public Order Order { get; set; }
     }
 
 }

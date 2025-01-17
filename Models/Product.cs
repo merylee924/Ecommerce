@@ -18,12 +18,32 @@ public class Product
     [Range(0.01, double.MaxValue, ErrorMessage = "Le prix doit être positif.")]
     public decimal Price { get; set; }
 
-    [Required(ErrorMessage = "L'URL de l'image est requise.")]
-    [Url(ErrorMessage = "URL invalide.")]
     public string ImageURL { get; set; }
 
     [Required(ErrorMessage = "La catégorie est requise.")]
     public int CategoryId { get; set; }
-    public ICollection<StoreProduct> Stores { get; set; } = new List<StoreProduct>(); // Ajout de la relation many-to-many
 
+    public ICollection<StoreProduct> Stores { get; set; } = new List<StoreProduct>(); // Relation many-to-many
+
+    // Nouveau champ pour la quantité
+    [Required(ErrorMessage = "La quantité est requise.")]
+    [Range(0, int.MaxValue, ErrorMessage = "La quantité doit être un entier positif.")]
+    public int Quantity { get; set; }
+
+    // Champ pour indiquer si le produit est en promotion
+    public bool OnSale { get; set; } = true;
+
+    // Propriété calculée pour déterminer si le produit est épuisé
+    public bool OutOfStock => Quantity <= 0;
+
+    // Méthode pour ajuster la quantité et vérifier l'état
+    public void AdjustQuantity(int adjustment)
+    {
+        Quantity += adjustment;
+
+        if (Quantity < 0)
+        {
+            Quantity = 0; // Empêche une quantité négative
+        }
+    }
 }

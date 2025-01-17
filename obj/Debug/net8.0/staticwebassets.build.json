@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "uEQB0kvnrkQGKw0HoM9XTrl/bf/ZH/hNNYeiTLuG9AI=",
+  "Hash": "XDJ+GtIR/GTRXD7CvdAiMyQ8jOryNfgm1hh30F1uqUU=",
   "Source": "Ecommerce",
   "BasePath": "_content/Ecommerce",
   "Mode": "Default",
@@ -16,44 +16,6 @@
     }
   ],
   "Assets": [
-    {
-      "Identity": "C:\\Users\\info\\Downloads\\Ecommerce\\obj\\Debug\\net8.0\\scopedcss\\bundle\\Ecommerce.styles.css",
-      "SourceId": "Ecommerce",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\info\\Downloads\\Ecommerce\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
-      "BasePath": "_content/Ecommerce",
-      "RelativePath": "Ecommerce.styles.css",
-      "AssetKind": "All",
-      "AssetMode": "CurrentProject",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ApplicationBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\info\\Downloads\\Ecommerce\\obj\\Debug\\net8.0\\scopedcss\\bundle\\Ecommerce.styles.css"
-    },
-    {
-      "Identity": "C:\\Users\\info\\Downloads\\Ecommerce\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Ecommerce.bundle.scp.css",
-      "SourceId": "Ecommerce",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\info\\Downloads\\Ecommerce\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
-      "BasePath": "_content/Ecommerce",
-      "RelativePath": "Ecommerce.bundle.scp.css",
-      "AssetKind": "All",
-      "AssetMode": "Reference",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ProjectBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\info\\Downloads\\Ecommerce\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Ecommerce.bundle.scp.css"
-    },
     {
       "Identity": "C:\\Users\\info\\Downloads\\Ecommerce\\wwwroot\\css\\site.css",
       "SourceId": "Ecommerce",

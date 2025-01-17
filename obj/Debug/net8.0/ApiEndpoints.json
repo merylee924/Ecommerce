@@ -1,5 +1,121 @@
 [
   {
+    "ContainingType": "CartController",
+    "Method": "GetCartContents",
+    "RelativePath": "api/Cart/{cartId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cartId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CartController",
+    "Method": "AddToCart",
+    "RelativePath": "api/Cart/add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Ecommerce.dto.AddToCartDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CartController",
+    "Method": "UpdateCartItemQuantity",
+    "RelativePath": "api/Cart/UpdateCartItemQuantity",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Ecommerce.dto.AddToCartDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ecommerce.Controllers.CategoryController",
+    "Method": "GetProductsByCategoryId",
+    "RelativePath": "api/Category/{categoryId}/products",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ecommerce.Controllers.CategoryController",
+    "Method": "AddCategories",
+    "RelativePath": "api/Category/add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categories",
+        "Type": "System.Collections.Generic.List\u00601[[Ecommerce.Models.Category, Ecommerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ecommerce.Controllers.CategoryController",
+    "Method": "GetAllCategories",
+    "RelativePath": "api/Category/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ecommerce.Controllers.RedisProductController",
+    "Method": "GetAllProducts",
+    "RelativePath": "api/RedisProduct/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ecommerce.Controllers.RedisProductController",
+    "Method": "CreateProduct",
+    "RelativePath": "api/RedisProduct/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "product",
+        "Type": "Product",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Ecommerce.Controllers.RedisProductController",
     "Method": "GetProduct",
     "RelativePath": "api/RedisProduct/get/{id}",
@@ -27,6 +143,43 @@
   },
   {
     "ContainingType": "Ecommerce.Controllers.StoreProductController",
+    "Method": "GetStoreById",
+    "RelativePath": "api/StoreProduct/{storeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "storeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ecommerce.Controllers.StoreProductController",
+    "Method": "AddProductToStore",
+    "RelativePath": "api/StoreProduct/{storeId}/addProduct",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "storeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "product",
+        "Type": "Product",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ecommerce.Controllers.StoreProductController",
     "Method": "GetProductsByStore",
     "RelativePath": "api/StoreProduct/{storeId}/products",
     "HttpMethod": "GET",
@@ -43,7 +196,7 @@
   },
   {
     "ContainingType": "Ecommerce.Controllers.StoreProductController",
-    "Method": "AddProductToStore",
+    "Method": "CreateStore",
     "RelativePath": "api/StoreProduct/add",
     "HttpMethod": "POST",
     "IsController": true,
@@ -51,7 +204,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "Ecommerce.Properties.dto.StoreProductRequest",
+        "Type": "Ecommerce.dto.StoreRequest",
         "IsRequired": true
       }
     ],
